@@ -64,7 +64,9 @@ class Plugin extends PluginBase
                 $record->total = count($emails);
                 $record->save();
                 foreach ($emails as $key => $email) {
-                    Mail::sendTo($email, $record->text, [], static function ($message) use ($record) {
+                    Mail::sendTo($email, 'dimsog.subscription::mail.message', [
+                        'text' => $record->text
+                    ], static function ($message) use ($record) {
                         $message->subject($record->subject);
                     });
                     Record::where('id', $record->id)
@@ -88,7 +90,8 @@ class Plugin extends PluginBase
     public function registerMailTemplates(): array
     {
         return [
-            'dimsog.subscription::mail.confirm_subscription'
+            'dimsog.subscription::mail.confirm_subscription',
+            'dimsog.subscription::mail.message'
         ];
     }
 }
