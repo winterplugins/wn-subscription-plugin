@@ -13,6 +13,9 @@ columns:
         sortable: true
     email:
         label: 'dimsog.subscription::lang.models.email.label'
-    subscribed:
-        label: 'dimsog.subscription::lang.models.email.subscribed'
+    verified:
+        label: 'dimsog.subscription::lang.models.email.verified'
         type: switch
+    verified_at:
+        label: 'dimsog.subscription::lang.models.email.verified_at'
+        type: datetime

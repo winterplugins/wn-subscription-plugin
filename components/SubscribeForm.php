@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dimsog\Subscription\Components;
 
+use Illuminate\Mail\Message;
 use Mail;
 use Backend\Facades\Backend;
 use Cms\Classes\ComponentBase;

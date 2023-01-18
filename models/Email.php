@@ -1,10 +1,11 @@
 <?php namespace Dimsog\Subscription\Models;
 
-use Carbon\Carbon;
+use Illuminate\Mail\Message;
+use Mail;
+use Illuminate\Support\Carbon;
 use Cms\Classes\Page;
 use Illuminate\Support\Facades\DB;
 use Model;
-use Winter\Storm\Mail\Mailable;
 use Winter\Storm\Support\Str;
 
 /**
@@ -103,15 +104,13 @@ class Email extends Model
                     'code' => $this->verify_code
                 ])
             ];
-            Mail::sendTo($this->email, 'dimsog.subscription::mail.confirm', $mailData, function (Mailable $message): void {
-                $message->subject('Please confirm subscription');
-            });
+            Mail::sendTo($this->email, 'dimsog.subscription::mail.confirm_subscription', $mailData);
         });
     }
 
     public static function findByVerifyCode(string $code): ?static
     {
-        return static::where('verified_code', $code)->first();
+        return static::where('verify_code', $code)->first();
     }
 
     public static function findByUnsubscribeCode(string $code): ?static
@@ -129,7 +128,7 @@ class Email extends Model
 
     public function subscribe(): bool
     {
-        $this->verified_at = DB::raw('NOW()');
+        $this->verified_at = Carbon::now();
         $this->verified = true;
         return $this->save();
     }

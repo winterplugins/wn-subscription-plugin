@@ -88,7 +88,7 @@ class Plugin extends PluginBase
     public function registerMailTemplates(): array
     {
         return [
-            'dimsog.subscription::mail.confirm'
+            'dimsog.subscription::mail.confirm_subscription'
         ];
     }
 }

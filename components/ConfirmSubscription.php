@@ -19,7 +19,7 @@ class ConfirmSubscription extends ComponentBase
 
     public function onRun()
     {
-        $model = Email::findBySubscribeCode((string) $this->property('code'));
+        $model = Email::findByVerifyCode((string) $this->property('code'));
 
         if ($model === null) {
             $this->controller->setStatusCode(404);

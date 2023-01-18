@@ -13,7 +13,8 @@ return [
         ],
         'email' => [
             'label' => 'Email',
-            'subscribed' => 'Subscribed',
+            'verified' => 'Verified',
+            'verified_at' => 'Verified at',
             'label_plural' => 'Emails',
         ],
         'record' => [
