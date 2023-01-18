@@ -103,9 +103,8 @@ class Email extends Model
                     'code' => $this->verify_code
                 ])
             ];
-            Mail::queue('dimsog.subscription::mail.confirm', $mailData, function (Mailable $message): void {
+            Mail::sendTo($this->email, 'dimsog.subscription::mail.confirm', $mailData, function (Mailable $message): void {
                 $message->subject('Please confirm subscription');
-                $message->to($this->email);
             });
         });
     }
