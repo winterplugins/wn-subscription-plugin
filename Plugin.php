@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dimsog\Subscription;
 
-use Backend;
+use Backend\Facades\Backend;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
