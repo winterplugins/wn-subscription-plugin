@@ -12,8 +12,8 @@ class Plugin extends PluginBase
     public function pluginDetails(): array
     {
         return [
-            'name'        => 'dimsog.blocks::lang.plugin.name',
-            'description' => 'dimsog.blocks::lang.plugin.description',
+            'name'        => 'dimsog.subscription::lang.plugin.name',
+            'description' => 'dimsog.subscription::lang.plugin.description',
             'author'      => 'Dimsog',
             'icon'        => 'icon-file-text-o'
         ];
