@@ -16,12 +16,11 @@ class CreateEmailsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
-            $table->timestamp('subscribed_at')->nullable();
-            $table->timestamp('last_send_subscribe_code')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->string('email')->unique();
-            $table->string('subscribe_code')->unique();
+            $table->string('verify_code')->unique();
             $table->string('unsubscribe_code')->unique();
-            $table->tinyInteger('subscribed')->default(0)->index();
+            $table->tinyInteger('verified')->default(0)->index();
         });
     }
 

@@ -3,6 +3,7 @@
 # ===================================
 
 fields:
-    id:
-        label: 'dimsog.subscription::lang.models.general.id'
+    email:
+        label: 'dimsog.subscription::lang.models.email.label'
+        required: true
         disabled: true

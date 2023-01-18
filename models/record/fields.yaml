@@ -3,6 +3,14 @@
 # ===================================
 
 fields:
-    id:
-        label: 'dimsog.subscription::lang.models.general.id'
-        disabled: true
+    send:
+        label: 'dimsog.subscription::lang.models.record.send'
+        type: switch
+    subject:
+        label: 'dimsog.subscription::lang.models.record.subject'
+        required: true
+    text:
+        label: 'dimsog.subscription::lang.models.record.message'
+        required: true
+        type: 'richeditor'
+        size: 'giant'

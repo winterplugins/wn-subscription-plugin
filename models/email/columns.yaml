@@ -11,9 +11,8 @@ columns:
         type: datetime
         searchable: true
         sortable: true
-        invisible: true
-    updated_at:
-        label: 'dimsog.subscription::lang.models.general.updated_at'
-        type: datetime
-        searchable: true
-        sortable: true
+    email:
+        label: 'dimsog.subscription::lang.models.email.label'
+    subscribed:
+        label: 'dimsog.subscription::lang.models.email.subscribed'
+        type: switch

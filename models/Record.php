@@ -71,4 +71,14 @@ class Record extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->bindEvent('model.afterUpdate', function () {
+
+        });
+    }
 }

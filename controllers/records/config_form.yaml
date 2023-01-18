@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: 'dimsog.subscription::lang.models.record.label'
+
+# Model Form Field configuration
+form: $/dimsog/subscription/models/record/fields.yaml
+
+# Model Class name
+modelClass: Dimsog\Subscription\Models\Record
+
+# Default redirect location
+defaultRedirect: dimsog/subscription/records
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: dimsog/subscription/records/update/:id
+    redirectClose: dimsog/subscription/records
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: dimsog/subscription/records
+    redirectClose: dimsog/subscription/records
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

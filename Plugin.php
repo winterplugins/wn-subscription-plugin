@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace Dimsog\Subscription;
 
 use Backend\Facades\Backend;
+use Dimsog\Subscription\Components\ConfirmSubscription;
+use Dimsog\Subscription\Components\SubscribeForm;
+use Dimsog\Subscription\Components\Unsubscribe;
+use Dimsog\Subscription\Models\Email;
+use Dimsog\Subscription\Models\Record;
 use System\Classes\PluginBase;
+use Winter\Storm\Support\Facades\DB;
+use Winter\Storm\Support\Facades\Mail;
 
 class Plugin extends PluginBase
 {
@@ -22,25 +29,66 @@ class Plugin extends PluginBase
     public function registerNavigation(): array
     {
         return [
-            'blocks' => [
-                'label'       => 'dimsog.blocks::lang.plugin.name',
-                'url'         => Backend::url('dimsog/blocks/blocks'),
-                'icon'        => 'icon-file-text-o',
+            'subscription' => [
+                'label'       => 'dimsog.subscription::lang.plugin.name',
+                'url'         => Backend::url('dimsog/subscription/records'),
+                'icon'        => 'icon-at',
                 'permissions' => ['*'],
                 'order'       => 500,
                 'sideMenu' => [
-                    'blocks' => [
-                        'label'       => 'dimsog.blocks::lang.plugin.name',
+                    'records' => [
+                        'label'       => 'dimsog.subscription::lang.plugin.name',
                         'icon'        => 'icon-file-text-o',
-                        'url'         => Backend::url('dimsog/blocks/blocks'),
+                        'url'         => Backend::url('dimsog/subscription/records'),
                     ],
-                    'categories' => [
-                        'label'       => 'dimsog.blocks::lang.models.category.label_plural',
-                        'icon'        => 'icon-th-list',
-                        'url'         => Backend::url('dimsog/blocks/categories'),
+                    'emails' => [
+                        'label'       => 'dimsog.subscription::lang.models.email.label_plural',
+                        'icon'        => 'icon-at',
+                        'url'         => Backend::url('dimsog/subscription/emails'),
                     ]
                 ]
             ]
+        ];
+    }
+
+    public function registerSchedule($schedule): void
+    {
+        $schedule->call(static function (): void {
+            $records = Record::where('send', 1)
+                ->whereNull('start_sending_at')
+                ->orderBy('id')
+                ->get();
+            $emails = Email::findSubscribedEmails();
+            foreach ($records as $record) {
+                $record->start_sending_at = DB::raw('NOW()');
+                $record->total = count($emails);
+                $record->save();
+                foreach ($emails as $key => $email) {
+                    Mail::sendTo($email, $record->text, [], static function ($message) use ($record) {
+                        $message->subject($record->subject);
+                    });
+                    Record::where('id', $record->id)
+                        ->update([
+                            'current' => $key + 1
+                        ]);
+                }
+            }
+        });
+    }
+
+    public function registerComponents(): array
+    {
+        return [
+            SubscribeForm::class => 'subscribeForm',
+            ConfirmSubscription::class => 'confirmSubscription',
+            Unsubscribe::class => 'unsubscribe'
+        ];
+    }
+
+    public function registerMailTemplates(): array
+    {
+        return [
+            'dimsog.subscription::mail.confirm'
         ];
     }
 }
