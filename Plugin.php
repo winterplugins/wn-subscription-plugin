@@ -73,7 +73,7 @@ class Plugin extends PluginBase
                         ]);
                 }
             }
-        });
+        })->everyFiveMinutes();
     }
 
     public function registerComponents(): array
