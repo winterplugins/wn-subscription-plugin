@@ -1,0 +1,4 @@
+1.0.0:
+  - First version of Subscription
+  - create_emails_table.php
+  - create_records_table.php

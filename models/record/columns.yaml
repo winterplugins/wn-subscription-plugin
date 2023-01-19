@@ -1,0 +1,28 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: 'dimsog.subscription::lang.models.general.id'
+        searchable: true
+    created_at:
+        label: 'dimsog.subscription::lang.models.general.created_at'
+        type: datetime
+        searchable: true
+        sortable: true
+    subject:
+        label: 'dimsog.subscription::lang.models.record.subject'
+    send:
+        label: 'dimsog.subscription::lang.models.record.send'
+        type: switch
+    start_sending_at:
+        label: 'dimsog.subscription::lang.models.record.start_sending'
+        type: datetime
+    finish_sending_at:
+        label: 'dimsog.subscription::lang.models.record.finish_sending'
+        type: datetime
+    emails_sent:
+        label: 'dimsog.subscription::lang.models.record.emails_sent'
+    total_emails:
+        label: 'dimsog.subscription::lang.models.record.total_emails'

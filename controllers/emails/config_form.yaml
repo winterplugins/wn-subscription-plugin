@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: 'dimsog.subscription::lang.models.email.label'
+
+# Model Form Field configuration
+form: $/dimsog/subscription/models/email/fields.yaml
+
+# Model Class name
+modelClass: Dimsog\Subscription\Models\Email
+
+# Default redirect location
+defaultRedirect: dimsog/subscription/emails
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: dimsog/subscription/emails/update/:id
+    redirectClose: dimsog/subscription/emails
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: dimsog/subscription/emails
+    redirectClose: dimsog/subscription/emails
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

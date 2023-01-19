@@ -1,0 +1,21 @@
+{
+    "name": "dimsog/wn-subscription-plugin",
+    "type": "winter-plugin",
+    "version": "1.0.0",
+    "description": "Send emails from WinterCMS",
+    "keywords": ["winter", "emails", "subscription"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/dimsog/wn-subscription-plugin/issues",
+        "source": "https://github.com/dimsog/wn-subscription-plugin"
+    },
+    "authors": [
+        {
+            "name": "Dmitry R",
+            "email": "dimsog@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    }
+}

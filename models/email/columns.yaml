@@ -1,0 +1,21 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: 'dimsog.subscription::lang.models.general.id'
+        searchable: true
+    created_at:
+        label: 'dimsog.subscription::lang.models.general.created_at'
+        type: datetime
+        searchable: true
+        sortable: true
+    email:
+        label: 'dimsog.subscription::lang.models.email.label'
+    verified:
+        label: 'dimsog.subscription::lang.models.email.verified'
+        type: switch
+    verified_at:
+        label: 'dimsog.subscription::lang.models.email.verified_at'
+        type: datetime

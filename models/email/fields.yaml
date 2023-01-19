@@ -1,0 +1,9 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    email:
+        label: 'dimsog.subscription::lang.models.email.label'
+        required: true
+        disabled: true
