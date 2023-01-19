@@ -17,11 +17,12 @@ class CreateRecordsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->tinyInteger('send')->default(0);
-            $table->timestamp('start_sending_at')->nullable();
+            $table->timestamp('start_sending_at')->nullable()->index();
+            $table->timestamp('finish_sending_at')->nullable();
             $table->string('subject');
             $table->longText('text');
-            $table->unsignedInteger('current')->default(0);
-            $table->unsignedInteger('total')->default(0);
+            $table->unsignedInteger('emails_sent')->default(0);
+            $table->unsignedInteger('total_emails')->default(0);
         });
     }
 

@@ -11,9 +11,18 @@ columns:
         type: datetime
         searchable: true
         sortable: true
-        invisible: true
-    updated_at:
-        label: 'dimsog.subscription::lang.models.general.updated_at'
+    subject:
+        label: 'dimsog.subscription::lang.models.record.subject'
+    send:
+        label: 'dimsog.subscription::lang.models.record.send'
+        type: switch
+    start_sending_at:
+        label: 'dimsog.subscription::lang.models.record.start_sending'
         type: datetime
-        searchable: true
-        sortable: true
+    finish_sending_at:
+        label: 'dimsog.subscription::lang.models.record.finish_sending'
+        type: datetime
+    emails_sent:
+        label: 'dimsog.subscription::lang.models.record.emails_sent'
+    total_emails:
+        label: 'dimsog.subscription::lang.models.record.total_emails'

@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace Dimsog\Subscription;
 
+use Dimsog\Subscription\Console\SendRecordsCommand;
 use Backend\Facades\Backend;
 use Dimsog\Subscription\Components\ConfirmSubscription;
 use Dimsog\Subscription\Components\SubscribeForm;
 use Dimsog\Subscription\Components\Unsubscribe;
-use Dimsog\Subscription\Models\Email;
-use Dimsog\Subscription\Models\Record;
 use System\Classes\PluginBase;
-use Winter\Storm\Support\Facades\DB;
-use Winter\Storm\Support\Facades\Mail;
 
 class Plugin extends PluginBase
 {
+    public function register(): void
+    {
+        $this->registerConsoleCommand('dimsog.subscription.sendRecordsCommand', SendRecordsCommand::class);
+    }
+
     public function pluginDetails(): array
     {
         return [
@@ -53,29 +55,7 @@ class Plugin extends PluginBase
 
     public function registerSchedule($schedule): void
     {
-        $schedule->call(static function (): void {
-            $records = Record::where('send', 1)
-                ->whereNull('start_sending_at')
-                ->orderBy('id')
-                ->get();
-            $emails = Email::findSubscribedEmails();
-            foreach ($records as $record) {
-                $record->start_sending_at = DB::raw('NOW()');
-                $record->total = count($emails);
-                $record->save();
-                foreach ($emails as $key => $email) {
-                    Mail::sendTo($email, 'dimsog.subscription::mail.message', [
-                        'text' => $record->text
-                    ], static function ($message) use ($record) {
-                        $message->subject($record->subject);
-                    });
-                    Record::where('id', $record->id)
-                        ->update([
-                            'current' => $key + 1
-                        ]);
-                }
-            }
-        })->everyFiveMinutes();
+        $schedule->command('subscription:send')->everyFiveMinutes();
     }
 
     public function registerComponents(): array

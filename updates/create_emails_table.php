@@ -16,6 +16,7 @@ class CreateEmailsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
+            $table->timestamp('last_send_verification_code')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->string('email')->unique();
             $table->string('verify_code')->unique();

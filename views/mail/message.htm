@@ -1,7 +1,11 @@
-subject = "Subscription message"
+subject = "Message template"
 description=""
 layout="system"
 
 ==
 
 {{ text | raw }}
+
+<div>
+    <small><a href="{{ unsubscribeUrl }}">unsubscribe</a></small>
+</div>
